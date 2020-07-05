@@ -1,0 +1,71 @@
+
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+
+! palenight 
+! special
+*.foreground:   #bfc7d5
+*.background:   #292d3e
+*.cursorColor:  #bfc7d5
+
+! black
+*.color0:       #292d3e
+*.color8:       #676e95
+
+! red
+*.color1:       #f07178
+*.color9:       #f07178
+
+! green
+*.color2:       #c3e88d
+*.color10:      #c3e88d
+
+! yellow
+*.color3:       #ffcb6b
+*.color11:      #ffcb6b
+
+! blue
+*.color4:       #82aaff
+*.color12:      #82aaff
+
+! magenta
+*.color5:       #c792ea
+*.color13:      #c792ea
+
+! cyan
+*.color6:       #89ddff
+*.color14:      #89ddff
+
+! white
+*.color7:       #bfc7d5
+*.color15:      #959dcb
+
+!! URxvt Appearance
+URxvt.font: Fira Code:style=Regular:size=11
+URxvt.boldFont: Fira Code:style=Regular:size=11
+URxvt.italicFont: Fira Code:style=Regular:size=11
+URxvt.boldItalicfont: Fira Code:style=Regular:size=11
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+

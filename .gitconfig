@@ -1,0 +1,19 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+  name = Stuart Byma
+  email = stuartbyma@gmail.com
+[core]
+  precomposeUnicode = true
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[color "status"]
+  added = green
+  changed = blue
+  untracked = red 
+[color "diff"]
+  meta = yellow
+  old = red 
+  new = green
