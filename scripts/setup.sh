@@ -11,6 +11,4 @@
 # See our bash changes
 source ~/.bashrc
 
-mkdir -p ~/.urxvt/ext
-wget -P ~/.urxvt/ext/ https://raw.githubusercontent.com/muennich/urxvt-perls/master/keyboard-select 
 
