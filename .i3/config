@@ -6,32 +6,16 @@
 # Set mod key ($mod_next=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $mod_next Mod4
-set $border_no_name border pixel 5
-set $border_normal border normal 5
- 
-# Theme colors
-# set variable for main accent color
-#set $acolor #eb564d
-set $acolor #d64161
- 
-# set other colors
-set $bgicolor #00979E
-set $bgucolor #6a6868
-set $txtacolor #F9FAF9
-set $txtucolor #bdbbbb
-set $indcolor #4deb56
- 
-# class                   border  backgr. text    indic.   child_border
-client.focused          $acolor $acolor $txtacolor $indcolor $acolor
-client.focused_inactive $bgicolor $bgicolor $txtacolor $indcolor $bgicolor
-client.unfocused        $bgucolor $bgucolor $txtucolor $indcolor $bgucolor
-#client.urgent           #CB4B16 #FDF6E3 #CB4B16 $indcolor
-#client.placeholder      #000000 #0c0c0c $txtacolor #000000
-#client.background       #2B2C2B
- 
-# set default desktop layout (default is tiling) <default|stacking|tabbed>
-workspace_layout stacking
- 
+set $border_no_name border pixel 2
+set $border_normal border normal 2
+default_border pixel 2
+
+for_window [class="^.*"] border pixel 0
+gaps inner 6
+
+# enable touchpad tapping
+exec xinput set-prop 12 305 1
+
 # set preferred focus_wrapping <yes|no|force>
 focus_wrapping no
  
@@ -52,62 +36,30 @@ popup_during_fullscreen leave_fullscreen
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font xft:BitstreamVeraSans-Roman 11
+font pango:Fira Code 9 
  
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
- 
-# Autostart applications
-exec --no-startup-id "xkbset exp =m; xkbset m"
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id alttab -pk h -nk l -fg "#d58681" -bg "#4a4a4a" -frame "#eb564d" -t 128x150 -i 127x64
-exec --no-startup-id conky -c ~/.config/conky
-exec --no-startup-id conky -c ~/.config/conky_shortcuts
-exec --no-startup-id copyq
-exec --no-startup-id fcitx -d
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id nm-applet
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id "pkill -9 redshift; redshift -P -t 5000:4000"
-exec --no-startup-id polychromatic-tray-applet
-set $picom_start "pkill picom; sleep 1; picom -b"
-exec_always --no-startup-id $picom_start
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id optimus-manager-qt
  
 # kill focused window
 bindsym $mod+Shift+q kill
  
 # start program launcher
-#bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+d+Shift exec --no-startup-id "rofi -show-icons -modi windowcd,window,drun -show drun"
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec "rofi -show-icons -modi windowcd,window,drun -show drun"
 bindsym $mod+Tab exec --no-startup-id "rofi -show-icons -modi windowcd,window,drun -show window"
- 
-# launch categorized menu
-#bindsym $mod+c exec --no-startup-id morc_menu
- 
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
- 
-exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
- 
-################################################################################################
- 
-# Increase/decrease sink volume 1
-bindsym $mod+F1 exec amixer -qD pulse set Master toggle; exec notify-send 'sound toggled'
-bindsym $mod+F2 exec amixer -qc 0 set Master 2db-; exec notify-send 'volume decreased'
-bindsym $mod+F3 exec amixer -qc 0 set Master 2db+; exec notify-send 'volume increased'
- 
-# Screen brightness controls
-bindsym $mod+F8 exec sudo xbacklight -10
-bindsym $mod+F9 exec sudo xbacklight +10
+
+bindsym $mod+Shift+greater move workspace to output right
+bindsym $mod+Shift+less move workspace to output left
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
  
 # focus_follows_mouse no
  
@@ -116,13 +68,6 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
- 
-# container focusing (with fallback for case where window is direct child of workspace container)
-# NOTE: requires xdotool
-#bindsym $mod+Ctrl+h exec "WINDOW=$(xdotool getactivewindow); i3-msg \\"focus parent; focus left; focus child\\"; NEW_WINDOW=$(xdotool getactivewindow); if [ \\"$NEW_WINDOW\\" -eq \\"$WINDOW\\" ]; then i3-msg \\"focus left\\"; fi"
-#bindsym $mod+Ctrl+j exec "WINDOW=$(xdotool getactivewindow); i3-msg \\"focus parent; focus down; focus child\\"; NEW_WINDOW=$(xdotool getactivewindow); if [ \\"$NEW_WINDOW\\" -eq \\"$WINDOW\\" ]; then i3-msg \\"focus down\\"; fi"
-#bindsym $mod+Ctrl+k exec "WINDOW=$(xdotool getactivewindow); i3-msg \\"focus parent; focus up; focus child\\"; NEW_WINDOW=$(xdotool getactivewindow); if [ \\"$NEW_WINDOW\\" -eq \\"$WINDOW\\" ]; then i3-msg \\"focus up\\"; fi"
-#bindsym $mod+Ctrl+l exec "WINDOW=$(xdotool getactivewindow); i3-msg \\"focus parent; focus right; focus child\\"; NEW_WINDOW=$(xdotool getactivewindow); if [ \\"$NEW_WINDOW\\" -eq \\"$WINDOW\\" ]; then i3-msg \\"focus right\\"; fi"
  
 # move focused window
 bindsym $mod+Shift+Left move left 100px
@@ -139,26 +84,6 @@ bindsym $mod+Shift+l move right 100px
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
- 
-# Set $con_title (embedded script) - used in split orientations below.
-# Three options for container title_format below (comment out one). 
-# - the first option give a simple oblique title format (which I prefer).
-# - the second option uses application window title (but colored and bolded) that was selected when the container was created.
-# - the third option simply uses "CONTAINER" window title - you can then use $mod+slash to set a custom name
-# NOTE1: Comment out all options to use default container title_format.
-# NOTE2: requires xdotool.
-#
-#set $con_title i3-msg focus parent, title_format \\"<span font_style='oblique'><tt> <u>%title</u></tt></span>\\", focus child
-#set $con_title i3-msg focus parent, title_format \\"<span foreground='#FEC196'><b>📦 %title</b></span>\\", focus child
-#set $con_title ANSWER=$(xdotool getwindowfocus getwindowname); i3-msg focus parent, title_format \\"<span foreground='#FEC196'><b> ⮡\\"$ANSWER\\"</b></span>\\", focus child
-#set $con_title i3-msg focus parent, title_format \\"<span foreground='#FEC196'><b>📦 <tt><u>\\$mod+/</u></tt> to change container title</b></span>\\", focus child
- 
- 
-# dynamic renaming of parent container
-bindsym $mod+slash exec "ANSWER=$(zenity --title=\\"i3-msg title_format\\" --text \\"Change %title for parent container\\" --entry); if [ -n \\"$ANSWER\\" ]; then i3-msg focus parent, title_format \\"<span font_style='oblique'> <u><tt>$ANSWER</tt></u></span>\\", focus child; fi"
-bindsym $mod+Shift+slash focus parent, title_format "<span font_style='oblique'> <u><tt>%title</tt></u></span>", focus child
-bindsym $mod+Ctrl+w exec "WINDOWS=$(xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) \\"\\" 2>/dev/null); for window in $WINDOWS; do xdotool windowactivate $window; i3-msg \\"split h; layout tabbed\\"; $con_title; done"
-bindsym $mod+Shift+Ctrl+w exec "WINDOWS=$(xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) \\"\\" 2>/dev/null); for window in $WINDOWS; do xdotool windowactivate $window; i3-msg \\"move left\\"; $con_title; done"
  
 # container layouts
 bindsym $mod+w layout tabbed;exec notify-send 'tabbed layout'
@@ -289,16 +214,9 @@ for_window [title="MuseScore: Play Panel"] floating enable
 for_window [title="alsamixer"] floating enable border pixel 1
  
 # Application shortcuts
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
- 
-# shortcuts to often used applications
-#bindsym $mod_next+u exec --no-startup-id pamac-manager
-#bindsym $mod_next+i exec --no-startup-id chromium
-#bindsym $mod_next+o exec --no-startup-id xfce4-appfinder
-#bindsym $mod_next+p exec --no-startup-id putty
-#bindsym $mod_next+bracketleft exec --no-startup-id nautilus
  
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -336,28 +254,28 @@ bindsym $mod+Home exec --no-startup-id i3exit lock, mode "default"
 bindsym $mod+F12 exec --no-startup-id i3exit suspend, mode "default"
  
 ## Resize window (you can also use the mouse for that)
-#bindsym $mod+r mode "resize"
-#mode "resize" {
-        ## These bindings trigger as soon as you enter the resize mode
-        ## Pressing left will shrink the window’s width.
-        ## Pressing right will grow the window’s width.
-        ## Pressing up will shrink the window’s height.
-        ## Pressing down will grow the window’s height.
-        #bindsym l resize shrink width 5 px or 5 ppt
-        #bindsym j resize grow height 5 px or 5 ppt
-        #bindsym k resize shrink height 5 px or 5 ppt
-        #bindsym semicolon resize grow width 5 px or 5 ppt
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym l resize shrink width 4 px or 4 ppt
+        bindsym j resize grow height 4 px or 4 ppt
+        bindsym k resize shrink height 4 px or 4 ppt
+        bindsym h resize grow width 4 px or 4 ppt
  
-        ## same bindings, but for the arrow keys
-        #bindsym Left resize shrink width 10 px or 10 ppt
-        #bindsym Down resize grow height 10 px or 10 ppt
-        #bindsym Up resize shrink height 10 px or 10 ppt
-        #bindsym Right resize grow width 10 px or 10 ppt
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 4 px or 4 ppt
+        bindsym Down resize grow height 4 px or 4 ppt
+        bindsym Up resize shrink height 4 px or 4 ppt
+        bindsym Right resize grow width 4 px or 4 ppt
  
-        ## exit resize mode: Enter or Escape
-        #bindsym Return mode "default"
-        #bindsym Escape mode "default"
-#}
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
  
  
  
@@ -376,7 +294,7 @@ bar {
     strip_workspace_numbers yes
  
     colors {
-        background #4a4a4a
+        background #292d3e
         statusline #F9FAF9
         separator  #454947
  

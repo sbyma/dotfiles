@@ -124,3 +124,5 @@ gdb-tmux() {
     tmux kill-pane -t "$id"
 }
 
+export PATH=$PATH:~/.local/bin
+
