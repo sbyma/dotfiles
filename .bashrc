@@ -126,3 +126,6 @@ gdb-tmux() {
 
 export PATH=$PATH:~/.local/bin
 
+export LC_ALL=en_US.UTF-8
+
+eval "$(thefuck --alias)"

@@ -14,7 +14,7 @@ for_window [class="^.*"] border pixel 0
 gaps inner 6
 
 # enable touchpad tapping
-exec xinput set-prop 12 305 1
+exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 
 # set preferred focus_wrapping <yes|no|force>
 focus_wrapping no
@@ -290,7 +290,7 @@ bar {
 #   tray_output eDP1
  
     bindsym button4 nop bindsym button5 nop
-#   font xft:URWGothic-Book 11
+    font pango:Font Awesome, Weather Icons, Fira Code 11 
     strip_workspace_numbers yes
  
     colors {
