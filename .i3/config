@@ -290,7 +290,7 @@ bar {
 #   tray_output eDP1
  
     bindsym button4 nop bindsym button5 nop
-    font pango:Font Awesome, Weather Icons, Fira Code 11 
+    font pango:Fira Code, Font Awesome 9 
     strip_workspace_numbers yes
  
     colors {
