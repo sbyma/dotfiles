@@ -129,3 +129,9 @@ export PATH=$PATH:~/.local/bin
 export LC_ALL=en_US.UTF-8
 
 eval "$(thefuck --alias)"
+
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/share/powerline/bindings/bash/powerline.sh
+

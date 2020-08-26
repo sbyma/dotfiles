@@ -39,3 +39,4 @@ linkDotfile .git-completion.bash
 linkDotfile .Xresources
 linkDotfile .i3
 linkDotfile .i3status.conf
+# todo: files in .config
