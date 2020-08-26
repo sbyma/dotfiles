@@ -27,6 +27,7 @@ install py3status
 install conky
 install fonts-font-awesome
 install xsel
+install powerline
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin # kitty
 
 mkdir -p ~/.vim/autoload ~/.vim/bundle
