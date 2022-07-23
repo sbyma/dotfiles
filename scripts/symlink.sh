@@ -33,6 +33,7 @@ linkDotfile .vimrc
 linkDotfile .tmux.conf
 linkDotfile .bashrc
 linkDotfile .bash_profile
+linkDotfile .zshrc
 linkDotfile .gitconfig
 linkDotfile .gitmessage
 linkDotfile .git-completion.bash

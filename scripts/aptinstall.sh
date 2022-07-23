@@ -28,7 +28,14 @@ install conky
 install fonts-font-awesome
 install xsel
 install powerline
+install zsh
+install python3-dev
+install python3-pip
+install python3-setuptools
+pip3 install thefuck --user
+
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin # kitty
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
